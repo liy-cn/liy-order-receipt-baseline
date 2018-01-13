@@ -3,39 +3,39 @@ package org.katas.refactoring;
 import java.util.List;
 
 public class Order {
-  private final String name;
-  private final String address;
+  private final String customerName;
+  private final String customerAddress;
   private final List<LineItem> lineItems;
   private final double taxRate;
 
   private double totalSalesTx = 0d;
   private double totalAmount = 0d;
 
-  public Order(String name, String address, List<LineItem> lineItems, double taxRate) {
-    this.name = name;
-    this.address = address;
+  public Order(String customerName, String customerAddress, List<LineItem> lineItems, double taxRate) {
+    this.customerName = customerName;
+    this.customerAddress = customerAddress;
     this.lineItems = lineItems;
     this.taxRate = taxRate;
     calcSalesTax();
   }
 
   public String getCustomerName() {
-    return name;
+    return customerName;
   }
 
   public String getCustomerAddress() {
-    return address;
+    return customerAddress;
   }
 
   public List<LineItem> getLineItems() {
     return lineItems;
   }
 
-  private void calcSalesTax(){
+  private void calcSalesTax() {
 
-    double salesTax = 0d;
+    double salesTax;
 
-    for (LineItem lineItem: lineItems) {
+    for (LineItem lineItem : lineItems) {
 
       salesTax = lineItem.totalAmount() * this.taxRate;
       totalSalesTx += salesTax;
@@ -47,11 +47,35 @@ public class Order {
 
   }
 
-  public double getTotalSalesTx(){
+  public double getTotalSalesTx() {
     return this.totalSalesTx;
   }
 
   public double getTotalAmount() {
     return totalAmount;
+  }
+
+  public String asString() {
+    StringBuilder output = new StringBuilder();
+    // print date, bill no, customer name
+    if (customerName != null) {
+      output.append(this.getCustomerName());
+    }
+    if (customerAddress != null) {
+      output.append(this.getCustomerAddress());
+    }
+
+    // prints lineItems
+    for (LineItem lineItem : this.getLineItems()) {
+      output.append(lineItem.asString());
+    }
+
+    // prints the state tax
+    output.append("Sales Tax").append(Consts.CHAR_SPLIT).append(this.getTotalSalesTx());
+
+    // print total amount
+    output.append("Total Amount").append(Consts.CHAR_SPLIT).append(this.getTotalAmount());
+
+    return output.toString();
   }
 }
