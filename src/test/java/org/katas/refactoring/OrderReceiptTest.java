@@ -4,19 +4,21 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class OrderReceiptTest {
     @Test
     public void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>());
+        String customerName = "Mr X";
+        String address = "Chicago, 60601";
+        Order order = new Order(customerName, address, new ArrayList<LineItem>());
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
 
-        assertThat(output, containsString("Mr X"));
-        assertThat(output, containsString("Chicago, 60601"));
+        assertThat(output, containsString(customerName));
+        assertThat(output, containsString(address));
     }
 
     @Test
