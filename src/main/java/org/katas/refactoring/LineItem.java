@@ -30,13 +30,13 @@ public class LineItem {
   public String asString(){
     StringBuilder output = new StringBuilder();
     output.append(this.getDescription());
-    output.append(Consts.CHAR_SPLIT);
+    output.append(Consts.CHAR_SEPERATOR);
     output.append(this.getPrice());
-    output.append(Consts.CHAR_SPLIT);
+    output.append(Consts.CHAR_SEPERATOR);
     output.append(this.getQuantity());
-    output.append(Consts.CHAR_SPLIT);
+    output.append(Consts.CHAR_SEPERATOR);
     output.append(this.totalAmount());
-    output.append(Consts.LINE_SPLIT);
+    output.append(Consts.LINE_SEPERATOR);
     return output.toString();
   }
 }

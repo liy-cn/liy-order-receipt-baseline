@@ -58,23 +58,25 @@ public class Order {
   public String asString() {
     StringBuilder output = new StringBuilder();
     // print date, bill no, customer name
-    if (customerName != null) {
+    if (this.getCustomerName() != null) {
       output.append(this.getCustomerName());
     }
-    if (customerAddress != null) {
+    if (this.getCustomerAddress() != null) {
       output.append(this.getCustomerAddress());
     }
 
     // prints lineItems
-    for (LineItem lineItem : this.getLineItems()) {
-      output.append(lineItem.asString());
+    if (this.getLineItems() != null && this.getLineItems().size() > 0) {
+      for (LineItem lineItem : this.getLineItems()) {
+        output.append(lineItem.asString());
+      }
     }
 
     // prints the state tax
-    output.append("Sales Tax").append(Consts.CHAR_SPLIT).append(this.getTotalSalesTx());
+    output.append("Sales Tax").append(Consts.CHAR_SEPERATOR).append(this.getTotalSalesTx());
 
     // print total amount
-    output.append("Total Amount").append(Consts.CHAR_SPLIT).append(this.getTotalAmount());
+    output.append("Total Amount").append(Consts.CHAR_SEPERATOR).append(this.getTotalAmount());
 
     return output.toString();
   }

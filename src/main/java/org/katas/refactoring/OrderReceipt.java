@@ -17,7 +17,7 @@ public class OrderReceipt {
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
     output.append("======Printing Orders======");
-    output.append(Consts.LINE_SPLIT);
+    output.append(Consts.LINE_SEPERATOR);
     output.append(order.asString());
     return output.toString();
   }
